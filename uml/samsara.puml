@@ -1,0 +1,246 @@
+@startuml
+set namespaceSeparator ::
+
+class "inventory_manage::addmachinepage.dart::MachinePage" {
+  -dynamic _username
+  -dynamic _password
+  +State<StatefulWidget*>* createState()
+}
+
+class "inventory_manage::addmachinepage.dart::MachinePageState" {
+  -List<dynamic>* _templates
+  -dynamic _username
+  -dynamic _password
+  +DateTime* day
+  +TimeOfDay* time
+  +TimeOfDay* timeNow
+  +DateTime* dayNow
+  +dynamic responsee
+  +bool* checkFlag
+  +String* equipmentType
+  +String* modelNumber
+  +String* brandName
+  +String* serialNumber
+  +bool* equip
+  +bool* model
+  +bool* brand
+  +bool* serial
+  +String* dropDownValue
+  +Map<String*, String*>* recordDetails
+  +List<DropdownMenuItem<dynamic>*>* templateDropDownItems
+  +BoxDecoration* containerDecor
+  +void initState()
+  +void setData()
+  -Future<Null*>* _selectDate()
+  -Future<Null*>* _selectTime()
+  +Widget* getDropDownList()
+  +Widget* build()
+}
+
+"inventory_manage::addmachinepage.dart::MachinePageState" o-- "flutter::src::material::time.dart::TimeOfDay"
+"inventory_manage::addmachinepage.dart::MachinePageState" o-- "flutter::src::painting::box_decoration.dart::BoxDecoration"
+
+class "inventory_manage::Data::APIs.dart::DataApi" {
+  +String* mainURL
+  +Map<String*, String*>* functions
+  +String* getApi()
+  +Future<dynamic>* getData()
+  +Future<dynamic>* getTemplates()
+  +Future<dynamic>* putTemplate()
+  +Future<dynamic>* getMachines()
+  +Future<dynamic>* getMachine()
+  +Future<dynamic>* putMachine()
+  +Future<dynamic>* putRecord()
+  +Future<dynamic>* getRecords()
+  +Future<dynamic>* getWorkers()
+}
+
+class "inventory_manage::Data::TablesData.dart::TaskType" {
+  +String* name
+  +int* count
+  +Color* color
+  +void setCount()
+}
+
+"inventory_manage::Data::TablesData.dart::TaskType" o-- "dart::ui::Color"
+
+class "inventory_manage::Data::TablesData.dart::MachineData" {
+  +String* eqtype
+  +String* brand
+  +String* model
+  +String* sno
+  +String* uid
+  +String* tname
+  +String* doi
+}
+
+class "inventory_manage::Data::TablesData.dart::TemplateData" {
+  +String* tname
+  +String* template
+}
+
+class "inventory_manage::Data::TablesData.dart::WorkerData" {
+  +int* wid
+  +String* wname
+  +String* wpic
+}
+
+class "inventory_manage::Data::TablesData.dart::RecordData" {
+  +String* uid
+  +bool* status
+  +int* sno
+  +int* wid_s
+  +int* wid_c
+  +String* dos
+  +String* doc
+  +String* template
+}
+
+class "inventory_manage::loginpage.dart::LoginPage" {
+  +State<StatefulWidget*>* createState()
+}
+
+class "inventory_manage::loginpage.dart::LoginPageState" {
+  -String* _username
+  -String* _password
+  +bool* user
+  +bool* pass
+  +Future<dynamic>* getErrorDialog()
+  +void buttonValue()
+  +void initState()
+  +Widget* build()
+}
+
+class "inventory_manage::main.dart::MyApp" {
+  +dynamic recordData
+  +dynamic machineData
+  +dynamic qrData
+  +Widget* build()
+}
+
+class "inventory_manage::main.dart::IntroAnimation" {
+  +State<StatefulWidget*>* createState()
+}
+
+class "inventory_manage::main.dart::IntroAnimationState" {
+  -AnimationController* _controller
+  -double* _scale
+  -Widget* _animatedButtonUI
+  +void initState()
+  +Widget* build()
+  -void _onTapDown()
+  -void _onTapUp()
+}
+
+"inventory_manage::main.dart::IntroAnimationState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"inventory_manage::main.dart::IntroAnimationState" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "inventory_manage::main.dart::IntroAnimationState"
+
+class "inventory_manage::mainpage.dart::HomePage" {
+  -String* _username
+  -String* _password
+  +State<StatefulWidget*>* createState()
+}
+
+class "inventory_manage::mainpage.dart::HomePageState" {
+  -String* _username
+  -String* _password
+  +TextEditingController* tname
+  +String* barcode
+  +void initState()
+  -Future<dynamic>* _qrscan()
+  +Widget* build()
+}
+
+"inventory_manage::mainpage.dart::HomePageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+
+class "inventory_manage::qrpage.dart::QRPage" {
+  -dynamic _details
+  -dynamic _username
+  -dynamic _password
+  +QRPageState* createState()
+}
+
+class "inventory_manage::qrpage.dart::QRPageState" {
+  -dynamic _details
+  -dynamic _username
+  -dynamic _password
+  -dynamic _encodedDetails
+  +bool* cache_true
+  +void initState()
+  +String* obscureText()
+  +Widget* build()
+}
+
+class "inventory_manage::recordspage.dart::RecordsPage" {
+  -dynamic _username
+  -dynamic _password
+  -dynamic _qrCode
+  +State<StatefulWidget*>* createState()
+}
+
+class "inventory_manage::recordspage.dart::RecordsPageState" {
+  +dynamic machineData
+  -dynamic _username
+  -dynamic _password
+  -dynamic _qrCode
+  +Widget* icons
+  -Future<dynamic>* _getRecords()
+  +Widget* getRecordList()
+  +Widget* build()
+}
+
+"inventory_manage::recordspage.dart::RecordsPageState" o-- "flutter::src::widgets::framework.dart::Widget"
+
+class "inventory_manage::recordspage.dart::MachineDetailsPage" {
+  +dynamic machineData
+  +Widget* build()
+}
+
+class "inventory_manage::trono::jsonbuilder.dart::JsonBuilder" {
+  +dynamic form
+  +String* uid
+  +bool* isResponse
+  +String* uname
+  +JsonBuilderState* createState()
+}
+
+class "inventory_manage::trono::jsonbuilder.dart::JsonBuilderState" {
+  +dynamic response
+  +DateTime* day
+  -dynamic _qrcode
+  -dynamic _uid
+  +Widget* giveButton()
+  +Widget* build()
+}
+
+class "inventory_manage::trono::main.dart::MyHomePage" {
+  +String* title
+  +String* tname
+  +_MyHomePageState* createState()
+}
+
+class "inventory_manage::trono::main.dart::_MyHomePageState" {
+  +GlobalKey<_MyHomePageState*>* myHomePageState
+  +List<dynamic>* template
+  +List<dynamic>* display
+  +String* descc
+  +ElevatedButton* bottom
+  +dynamic response
+  +void initState()
+  +dynamic refresh()
+  -dynamic _addTextDialog()
+  -dynamic _addSwitchDialog()
+  -dynamic _addCheckDialog()
+  +Widget* build()
+}
+
+"inventory_manage::trono::main.dart::_MyHomePageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<_MyHomePageState>"
+"inventory_manage::trono::main.dart::_MyHomePageState" o-- "flutter::src::material::elevated_button.dart::ElevatedButton"
+
+class "inventory_manage::trono::models::template.dart::FormTemplate" {
+  +List<dynamic>* template
+}
+
+
+@enduml
